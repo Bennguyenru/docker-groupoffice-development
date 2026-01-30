@@ -18,8 +18,8 @@ RUN sed -i "s/config\['debug'\] = false;/config\['debug'\] = true;/" /etc/groupo
 
 RUN sed -i "s/output_buffering = 4096/output_buffering = off/" /usr/local/etc/php/php.ini
 
-# Copy composer from official composer image
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+# Copy composer from official composer image (pinned to v2 for stability)
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
 
 # For supporting host.docker.internal on Linux. See https://github.com/docker/for-linux/issues/264 (uses pkg iproute2 host)
 COPY docker-godev-entrypoint-250.sh /usr/local/bin
